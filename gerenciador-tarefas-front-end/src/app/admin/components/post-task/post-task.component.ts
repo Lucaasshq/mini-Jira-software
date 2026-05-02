@@ -5,6 +5,8 @@ import { MatButton, MatButtonModule } from "@angular/material/button";
 import { Form, FormBuilder, FormGroup, Validators, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from "../../../MaterialModule";
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-task',
@@ -13,26 +15,28 @@ import { CommonModule } from '@angular/common';
   styleUrl: './post-task.component.scss'
 })
 export class PostTaskComponent {
-postTask() {
-throw new Error('Method not implemented.');
-}
+
 
   tarefaForm!: FormGroup
   listOfFuncionarios: User[] = [];
   listOfPriority: any = ["BAIXA", "MEDIA", "ALTA"]
 
-  constructor(private adminService: AdminService, private fb:FormBuilder) {
+  constructor(
+    private adminService: AdminService,
+    private fb: FormBuilder,
+    private snackBar:MatSnackBar,
+    private router:Router) {
     this.getUsers()
 
 
     this.tarefaForm = fb.group({
-      funcionarioId: [null,[Validators.required]],
+      funcionarioId: [null, [Validators.required]],
       title: [null, [Validators.required]],
       description: [null, [Validators.required]],
       dueDate: [null, Validators.required],
       priority: [null, Validators.required]
     })
-   }
+  }
 
 
 
@@ -40,10 +44,24 @@ throw new Error('Method not implemented.');
     this.adminService.getUsers().subscribe({
       next: (res: User[]) => {
         this.listOfFuncionarios = res
-        console.log(res)
       },
       error: (err) => {
         console.error("erro ao tentar buscar usuario", err)
+      }
+    })
+  }
+
+  public postTask(){
+    this.adminService.postTask(this.tarefaForm.value).subscribe({
+      next: (res: any) => {
+        if (res.id != null){
+          this.snackBar.open("Tarefa criada com sucesso", "Close", {duration:5000})
+          this.router.navigateByUrl("/admin/dashboard")
+        }
+      }, 
+      error: (err: any) => {
+        console.error("erro ao tentar salvar tarefa.", err)
+        this.snackBar.open("Erro ao tentar salvar tarefa.", "ERROR", {duration:5000})
       }
     })
   }

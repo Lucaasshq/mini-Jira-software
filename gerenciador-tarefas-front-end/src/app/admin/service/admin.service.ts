@@ -11,10 +11,14 @@ const BASE_URL = "http://localhost:8080"
 })
 export class AdminService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public getUsers(): Observable<User[]>{
-  return this.http.get<User[]>(`${BASE_URL}/admin/users`,{ headers: this.createAuthorizationHeader()})
+  public getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${BASE_URL}/admin/users`, { headers: this.createAuthorizationHeader() })
+  }
+
+  public postTask(taskDTO: any): Observable<any> {
+    return this.http.post<any>(`${BASE_URL}/admin/task`, taskDTO, { headers: this.createAuthorizationHeader() })
   }
 
   private createAuthorizationHeader(): HttpHeaders {
