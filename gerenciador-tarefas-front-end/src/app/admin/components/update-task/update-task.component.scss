@@ -1,0 +1,31 @@
+h2{
+  color: #276CC4;
+}
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+}
+
+
+
+.form-field{
+  display: flex;
+  padding: 5px;
+  width: 600px;
+}
+
+
+.button-submit-task{
+    display: block;
+    margin: 20px auto;
+
+    width: 20%;
+    border-radius: 5px;
+}
+
+

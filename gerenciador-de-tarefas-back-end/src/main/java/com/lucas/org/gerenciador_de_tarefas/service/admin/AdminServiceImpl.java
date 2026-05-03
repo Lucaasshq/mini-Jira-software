@@ -79,4 +79,27 @@ public class AdminServiceImpl implements AdminService {
         return  taskDTO.getTaskDTO();
     }
 
+    @Override
+    public TaskDTO updateTask(Long id, TaskDTO taskDTO) {
+        Task task = taskRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Tarefa de id "+ id + " não encontrada!")
+        );
+        task.setTitle(taskDTO.getTitle());
+        task.setDescription(taskDTO.getDescription());
+        task.setDueDate(taskDTO.getDueDate());
+        task.setPriority(taskDTO.getPriority());
+        task.setTaskStatus(mapStringToTaskStatus(String.valueOf(taskDTO.getTaskStatus())));
+        return taskRepository.save(task).getTaskDTO();
+    }
+
+    private TaskStatus mapStringToTaskStatus(String status) {
+        return switch (status){
+            case "PENDING" -> TaskStatus.PENDING;
+            case "INPROGRESS" -> TaskStatus.INPROGRESS;
+            case "COMPLETED" -> TaskStatus.COMPLETED;
+            case "DEFERRED" -> TaskStatus.DEFERRED;
+            default -> TaskStatus.CANCELED;
+        };
+    }
+
 }

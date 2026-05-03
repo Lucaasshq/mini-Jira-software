@@ -39,4 +39,8 @@ export class AdminService {
   public deleteTask(id:number): Observable<void> {
     return this.http.delete<void>(`${BASE_URL}/admin/task/${id}`, {headers:this.createAuthorizationHeader()})
   }
+
+  public updatedTask(id:number, taskDTO:any): Observable<any> {
+    return this.http.patch<any>(`${BASE_URL}/admin/task/${id}`, taskDTO, {headers:this.createAuthorizationHeader()})
+  }
 }
