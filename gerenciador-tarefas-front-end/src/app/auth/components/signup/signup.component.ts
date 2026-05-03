@@ -3,14 +3,14 @@ import { AuthService } from './../../services/auth/auth.service';
 import { Component } from '@angular/core';
 import { MaterialModule } from "../../../MaterialModule";
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  imports: [MaterialModule, CommonModule, ReactiveFormsModule],
+  imports: [MaterialModule, ReactiveFormsModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })

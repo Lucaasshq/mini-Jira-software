@@ -6,56 +6,70 @@
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Titulo</mat-label>
       <input matInput type="text" placeholder="Titulo" formControlName="title">
-      <mat-error *ngIf="tarefaForm.get('title')?.hasError('required')">
-        este campo é requerido.
-      </mat-error>
+      @if (tarefaForm.get('title')?.hasError('required')) {
+        <mat-error>
+          este campo é requerido.
+        </mat-error>
+      }
     </mat-form-field>
 
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Descrição</mat-label>
       <textarea matInput type="text" placeholder="Descrição" formControlName="description"></textarea>
-      <mat-error *ngIf="tarefaForm.get('description')?.hasError('required')">
-        este campo é requerido.
-      </mat-error>
+      @if (tarefaForm.get('description')?.hasError('required')) {
+        <mat-error>
+          este campo é requerido.
+        </mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Data de Vencimento</mat-label>
       <input matInput [matDatepicker]="dueDatePicker" placeholder="Escolha data de vencimento"
         formControlName="dueDate">
-      <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
-      <mat-datepicker #dueDatePicker></mat-datepicker>
-      <mat-error *ngIf="tarefaForm.get('dueDate')?.hasError('required')">
-        este campo é requerido.
-      </mat-error>
-    </mat-form-field>
+        <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #dueDatePicker></mat-datepicker>
+        @if (tarefaForm.get('dueDate')?.hasError('required')) {
+          <mat-error>
+            este campo é requerido.
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Selecione a Prioridade</mat-label>
-      <mat-select formControlName="priority" name="priority">
-        <mat-option *ngFor="let priority of listOfPriority" [value]="priority">
-          {{priority}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="tarefaForm.get('priority')?.hasError('required')">
-        este campo é requerido.
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Selecione a Prioridade</mat-label>
+        <mat-select formControlName="priority" name="priority">
+          @for (priority of listOfPriority; track priority) {
+            <mat-option [value]="priority">
+              {{priority}}
+            </mat-option>
+          }
+        </mat-select>
+        @if (tarefaForm.get('priority')?.hasError('required')) {
+          <mat-error>
+            este campo é requerido.
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Selecione o Funcionário</mat-label>
-      <mat-select formControlName="funcionarioId" name="funcionarioId">
-        <mat-option *ngFor="let funcionario of listOfFuncionarios" [value]="funcionario.id">
-          {{funcionario.username}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="tarefaForm.get('funcionarioId')?.hasError('required')">
-        este campo é requerido
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Selecione o Funcionário</mat-label>
+        <mat-select formControlName="funcionarioId" name="funcionarioId">
+          @for (funcionario of listOfFuncionarios; track funcionario) {
+            <mat-option [value]="funcionario.id">
+              {{funcionario.username}}
+            </mat-option>
+          }
+        </mat-select>
+        @if (tarefaForm.get('funcionarioId')?.hasError('required')) {
+          <mat-error>
+            este campo é requerido
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <button mat-flat-button class="button-submit-task" type="submit" (click)="postTask()">Criar
-    </button>
-  </form>
-</div>
+      <button mat-flat-button class="button-submit-task" type="submit" (click)="postTask()">Criar
+      </button>
+    </form>
+  </div>

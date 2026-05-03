@@ -4,13 +4,13 @@ import { User } from '../../../model/User';
 import { MatButton, MatButtonModule } from "@angular/material/button";
 import { Form, FormBuilder, FormGroup, Validators, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from "../../../MaterialModule";
-import { CommonModule } from '@angular/common';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-task',
-  imports: [MatButtonModule, ReactiveFormsModule, MaterialModule, CommonModule],
+  imports: [MatButtonModule, ReactiveFormsModule, MaterialModule],
   templateUrl: './post-task.component.html',
   styleUrl: './post-task.component.scss'
 })

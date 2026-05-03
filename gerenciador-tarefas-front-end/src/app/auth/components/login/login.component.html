@@ -1,42 +1,46 @@
 <div class="container">
-    <mat-card class="form-card">
-        <mat-card-title>Login</mat-card-title>
+  <mat-card class="form-card">
+    <mat-card-title>Login</mat-card-title>
 
-        <mat-card-content class="">
-            <form [formGroup]="loginForm" class="form-main">
+    <mat-card-content class="">
+      <form [formGroup]="loginForm" class="form-main">
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" placeholder="email" required>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="email" required>
 
-                    <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-                        Por favor entre com email valido.
-                    </mat-error>
-                </mat-form-field>
+          @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+            <mat-error>
+              Por favor entre com email valido.
+            </mat-error>
+          }
+        </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Senha</mat-label>
-                    <input matInput type="{{mostrarSenha ? 'password' : 'text'}}" formControlName="password"
-                        placeholder="password" required>
+        <mat-form-field appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input matInput type="{{mostrarSenha ? 'password' : 'text'}}" formControlName="password"
+            placeholder="password" required>
 
-                    <button mat-icon-button matSuffix (click)="alterarVisibilidadePassword()">
-                        <mat-icon>{{ mostrarSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
-                    </button>
+            <button mat-icon-button matSuffix (click)="alterarVisibilidadePassword()">
+              <mat-icon>{{ mostrarSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
 
-                    <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-                        Por favor entre com senha valida.
-                    </mat-error>
-                </mat-form-field>
+            @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+              <mat-error>
+                Por favor entre com senha valida.
+              </mat-error>
+            }
+          </mat-form-field>
 
 
-                <button mat-flat-button type="submit" [disabled]="loginForm.invalid"
-                        (click)="login()">Login</button>
+          <button mat-flat-button type="submit" [disabled]="loginForm.invalid"
+          (click)="login()">Login</button>
 
-                <mat-card-actions>
-                    <button routerLink="/signup" class="button-nao-conta" mat-button>Não tenho conta </button>
-                </mat-card-actions>
+          <mat-card-actions>
+            <button routerLink="/signup" class="button-nao-conta" mat-button>Não tenho conta </button>
+          </mat-card-actions>
 
-            </form>
-        </mat-card-content>
+        </form>
+      </mat-card-content>
     </mat-card>
-</div>
+  </div>

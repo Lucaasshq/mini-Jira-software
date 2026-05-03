@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MaterialModule } from './MaterialModule';
 import { StorageService } from './auth/services/storage/storage.service';
-import { CommonModule } from '@angular/common';
+
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MaterialModule, RouterLink, CommonModule],
+  imports: [RouterOutlet, MaterialModule, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
