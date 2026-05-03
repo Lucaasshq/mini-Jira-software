@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../model/User';
 import { StorageService } from '../../auth/services/storage/storage.service';
+import { taskDTO } from '../../model/taskDTO';
 
 const BASE_URL = "http://localhost:8080"
 
@@ -25,5 +26,17 @@ export class AdminService {
     var r = new HttpHeaders().set('Authorization', 'Bearer ' + StorageService.getToken());
 
     return r
+  }
+
+  public getAllTask(): Observable<taskDTO> {
+    return this.http.get<any>(`${BASE_URL}/admin/task`, {headers: this.createAuthorizationHeader()})
+  }
+
+  public getTaskById(id:number): Observable<taskDTO> {
+    return this.http.get<taskDTO>(`${BASE_URL}/admin/task/${id}`, {headers: this.createAuthorizationHeader()})
+  }
+
+  public deleteTask(id:number): Observable<void> {
+    return this.http.delete<void>(`${BASE_URL}/admin/task/${id}`, {headers:this.createAuthorizationHeader()})
   }
 }

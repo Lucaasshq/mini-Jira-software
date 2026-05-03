@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -28,6 +29,22 @@ public class AdminController {
        TaskDTO createTask = adminService.createTask(taskDTO);
        if (createTask == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
        return ResponseEntity.status(HttpStatus.CREATED).body(createTask);
+    }
+
+    @GetMapping("/task")
+    public ResponseEntity<List<TaskDTO>> getAllTask(){
+        return ResponseEntity.ok(adminService.getAllTask());
+    }
+
+    @DeleteMapping("/task/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id){
+        adminService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("task/{id}")
+    public ResponseEntity<TaskDTO> getTaskById(@PathVariable Long id){
+        return  ResponseEntity.ok(adminService.getTaskById(id));
     }
 
 

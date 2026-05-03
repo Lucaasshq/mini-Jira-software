@@ -21,13 +21,17 @@ import static io.jsonwebtoken.Jwts.builder;
 @Configuration
 public class JwtUtils {
 
-    @Autowired
+
     UserRepository userRepository;
+
+    public JwtUtils(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     private static final String SECRET = "63640264849a87c90356129d99ea165e37aa5fabc1fea46906df1a7ca50db492";
     public static final long EXPIRE_DAYS = 0;
-    public static final long EXPIRE_HOURS = 0;
-    public static final long EXPIRE_MINUTES = 5;
+    public static final long EXPIRE_HOURS = 2;
+    public static final long EXPIRE_MINUTES = 30;
     public static final long EXPIRATION_REFRESH_TOKEN_DAYS = 7;
     public static final String JWT_AUTHORIZATION = "Authorization";
     public static final String JWT_BEARER = "Bearer ";

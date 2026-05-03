@@ -37,7 +37,6 @@ export class SignupComponent {
   }
 
   signup() {
-    console.log(this.signupForm.value)
     const password = this.signupForm.get("password")?.value;
     const confirmarPassword = this.signupForm.get("confirmarPassword")?.value;
 
@@ -48,7 +47,6 @@ export class SignupComponent {
 
     this.authService.signup(this.signupForm.value).subscribe({
       next: (res) => {
-        console.log(res)
         this.snackbar.open("Registro feito com sucesso", "Close", { duration: 5000 })
         this.router.navigate(["/login"])
       },

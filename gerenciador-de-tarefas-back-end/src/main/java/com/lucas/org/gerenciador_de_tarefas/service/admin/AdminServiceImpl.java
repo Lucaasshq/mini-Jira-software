@@ -15,8 +15,10 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -53,6 +55,28 @@ public class AdminServiceImpl implements AdminService {
            return taskRepository.save(task).getTaskDTO();
         }
         return null;
+    }
+
+    @Override
+    public List<TaskDTO> getAllTask() {
+        return taskRepository.findAll().stream()
+                .sorted(Comparator.comparing((Task task) -> task.getDueDate()).reversed())
+                .map(task -> task.getTaskDTO())
+                .toList();
+
+    }
+
+    @Override
+    public void deleteTask(Long id) {
+        taskRepository.deleteById(id);
+    }
+
+    @Override
+    public TaskDTO getTaskById(Long id) {
+        Task taskDTO = taskRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Tarefa de id "+ id + " não encontrada!")
+        );
+        return  taskDTO.getTaskDTO();
     }
 
 }

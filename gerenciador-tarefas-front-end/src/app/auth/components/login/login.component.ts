@@ -43,7 +43,7 @@ export class LoginComponent {
         if (StorageService.eAdminLogado()) {
           this.router.navigateByUrl("/admin")
         } else if (StorageService.eFuncionarioLogado()) {
-          this.router.navigateByUrl("/funcionario")
+          this.router.navigateByUrl("/funcionario/dashboard")
           this.snackbar.open("Login efetuado com sucesso", "Close", { duration: 5000 })
         }
 
